@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rainbow
+  name: daily-slack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: daily-slack
+  template:
+    metadata:
+      labels:
+        app: daily-slack
+    spec:
+      containers:
+        - name: daily-slack
+          image: harbor.liebi.com/rainbow/daily-slack:bc640a4
+          resources:
+            limits:
+              cpu: "200m"
+              memory: 200Mi
+      imagePullSecrets:
+      - name: harbor
